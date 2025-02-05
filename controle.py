@@ -224,7 +224,7 @@ if opcao == "Registrar Gastos":
         st.info("Nenhum registro financeiro encontrado.")
 
 if opcao == "Visualizar Gastos":
-    st.title("Visualização de Gastos 💰")
+    st.title("Visualização de GA 💰")
     st.markdown("---")
 
     # Métricas Financeiras
