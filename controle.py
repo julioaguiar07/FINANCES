@@ -6,7 +6,9 @@ import requests
 import base64
 
 # Configuração de estilo
-st.set_page_config(page_title="Controle Financeiro", layout="wide")
+st.set_page_config(page_title="Controle Financeiro", layout="wide", page_icon="💰")
+
+# Estilo personalizado
 st.markdown(
     '''
     <style>
@@ -32,22 +34,21 @@ st.markdown(
         margin: 0;
     }
     .metric-box {
-        background-color: #CF8C28;
+        background-color: #0E2C4E;
         border-radius: 8px;
         padding: 20px;
         text-align: center;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        color: white;
     }
     .metric-box h3 {
         margin: 0;
-        color: #ffffff;
         font-size: 24px;
         font-weight: bold;
     }
     .metric-box p {
         margin: 0;
         font-size: 20px;
-        color: #ffffff;
     }
     .stButton button {
         background-color: #0E2C4E;
@@ -58,6 +59,24 @@ st.markdown(
     }
     .stButton button:hover {
         background-color: #CF8C28;
+    }
+    .stSelectbox, .stNumberInput, .stTextInput {
+        margin-bottom: 16px;
+    }
+    .stExpander {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stDataFrame {
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stPlotlyChart {
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
     </style>
     ''',
@@ -128,6 +147,7 @@ def adicionar_registro_financeiro(tipo, valor, data, descricao):
     mensagem = f'''
 💰 Novo Gasto Adicionado 💰
 
+📋 Processo ID: 1  
 📌 Tipo: {tipo}  
 💵 Valor: R$ {valor:.2f}  
 📅 Data: {data}  
@@ -168,7 +188,7 @@ def calcular_tipo_mais_gasto():
 
 # Interface do Streamlit
 st.sidebar.title("Controle de Gastos 📂")
-st.sidebar.text("Sistema de Gerenciamento")
+st.sidebar.text("Sistema de Gerenciamento Financeiro")
 
 opcao = st.sidebar.radio("Páginas", ["Visualizar Gastos", "Registrar Gastos"])
 
@@ -177,7 +197,7 @@ if opcao == "Registrar Gastos":
     st.markdown("---")
 
     # Adicionar Registro Financeiro
-    with st.expander("Adicionar Registro Financeiro"):
+    with st.expander("Adicionar Registro Financeiro", expanded=True):
         tipo = st.selectbox("Tipo", ["Comida", "Uber", "Gasolina", "Compras", "Mercado", "Assinaturas","Lazer"], key="financeiro_tipo")
         valor = st.number_input("Valor", min_value=0.0, key="financeiro_valor")
         data = st.text_input("Data (ex: 2023-09-03)", key="financeiro_data")
@@ -206,8 +226,8 @@ if opcao == "Registrar Gastos":
 if opcao == "Visualizar Gastos":
     st.title("Visualização de Gastos 💰")
     st.markdown("---")
-        # Métricas Financeiras
-    st.markdown("---")
+
+    # Métricas Financeiras
     st.write("### Métricas Financeiras")
     gastos_por_mes = calcular_gastos_por_mes()
     tipo_mais_gasto = calcular_tipo_mais_gasto()
