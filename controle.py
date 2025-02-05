@@ -128,7 +128,6 @@ def adicionar_registro_financeiro(tipo, valor, data, descricao):
     mensagem = f'''
 💰 Novo Gasto Adicionado 💰
 
-📋 Processo ID: 1  
 📌 Tipo: {tipo}  
 💵 Valor: R$ {valor:.2f}  
 📅 Data: {data}  
